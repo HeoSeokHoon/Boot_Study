@@ -43,6 +43,9 @@
   		<result column="BOARDCONTENTS" property="boardContents"/>
   		<result column="BOARDDATE" property="boardDate"/>
   		<result column="BOARDHIT" property="boardHit"/>
+  		<result column="BOARDREF" property="boardRef"/>
+  		<result column="BOARDSTEP" property="boardStep"/>
+  		<result column="BOARDDEPTH" property="boardDepth"/>
   		<collection property="fileVOs" javaType="List" ofType="FileVO">
   			<id column="FILENUM" property="fileNum"/>
   			<result column="FILENAME" property="fileName"/>
@@ -52,10 +55,14 @@
   	
   	<insert id="add" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="boardNum">
   		INSERT INTO QNA
-  		(BOARDWRITER, BOARDHEAD, BOARDDATE, BOARDHIT, BOARDCONTENTS)
+  		(BOARDWRITER, BOARDHEAD, BOARDDATE, BOARDHIT, BOARDCONTENTS, BOARDREF, BOARDSTEP, BOARDDEPTH)
   		VALUES
-  		(#{boardWriter}, #{boardHead}, now(), 0, #{boardContents})
+  		(#{boardWriter}, #{boardHead}, now(), 0, #{boardContents},0,0,0)
   	</insert>
+  	
+  	<update id="refUpdate" parameterType="BoardVO">
+  		UPDATE QNA SET BOARDREF=#{boardNum} WHERE BOARDNUM=#{boardNum}
+  	</update>
   	
   	<insert id="fileAdd" parameterType="FileVO">
   		INSERT INTO QNAFILES VALUES(null, #{boardNum}, #{fileName}, #{oriName});

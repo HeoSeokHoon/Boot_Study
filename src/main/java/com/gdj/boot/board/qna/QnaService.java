@@ -28,6 +28,8 @@ public class QnaService implements BoardService {
 	public int add(BoardVO boardVO, MultipartFile[] attach) throws Exception {
 		// TODO Auto-generated method stub
 		int result = qnaDAO.add(boardVO);
+		
+		result = qnaDAO.refUpdate(boardVO);
 		for(MultipartFile multipartFile:attach) {
 			if(multipartFile.isEmpty()) {
 				continue;
