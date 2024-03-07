@@ -1,4 +1,4 @@
-package com.gdj.boot.board.notice;
+package com.gdj.boot.board.qna;
 
 import java.util.List;
 
@@ -13,15 +13,12 @@ import com.gdj.boot.board.FileVO;
 import com.gdj.boot.util.FileManager;
 import com.gdj.boot.util.Pager;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
-@Slf4j
-public class NoticeService implements BoardService {
+public class QnaService implements BoardService {
 	
 	@Autowired
-	private NoticeDAO noticeDAO;
-	@Value("${app.upload.board.notice}")
+	private QnaDAO qnaDAO;
+	@Value("${app.upload.board.qna}")
 	private String uploadPath;
 	@Autowired
 	private FileManager fileManager;
@@ -30,19 +27,17 @@ public class NoticeService implements BoardService {
 	@Override
 	public int add(BoardVO boardVO, MultipartFile[] attach) throws Exception {
 		// TODO Auto-generated method stub
-		int result = noticeDAO.add(boardVO);
-		
+		int result = qnaDAO.add(boardVO);
 		for(MultipartFile multipartFile:attach) {
 			if(multipartFile.isEmpty()) {
 				continue;
 			}
-			
 			String fileName = fileManager.fileSave(uploadPath, multipartFile);
 			FileVO fileVO = new FileVO();
 			fileVO.setBoardNum(boardVO.getBoardNum());
 			fileVO.setFileName(fileName);
 			fileVO.setOriName(multipartFile.getOriginalFilename());
-			noticeDAO.fileAdd(fileVO);
+			qnaDAO.fileAdd(fileVO);
 		}
 		return result;
 	}
@@ -50,21 +45,21 @@ public class NoticeService implements BoardService {
 	@Override
 	public List<BoardVO> getList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		pager.makeNum(noticeDAO.getTotalCount(pager));
 		pager.makeIndex();
-		
-		return noticeDAO.getList(pager);
+		pager.makeNum(qnaDAO.getTotalCount(pager));
+		return qnaDAO.getList(pager);
 	}
 	
 	@Override
 	public BoardVO getDetail(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		return noticeDAO.getDetail(boardVO);
+		return qnaDAO.getDetail(boardVO);
 	}
 	
 	@Override
 	public FileVO getFileDetail(FileVO fileVO) throws Exception {
 		// TODO Auto-generated method stub
-		return noticeDAO.getFileDetail(fileVO);
+		return qnaDAO.getFileDetail(fileVO);
 	}
+	
 }

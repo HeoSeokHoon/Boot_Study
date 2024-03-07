@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.gdj.boot.board.notice.NoticeDAO">
+  <mapper namespace="com.gdj.boot.board.qna.QnaDAO">
   
   	<sql id="search">
   		<where>
@@ -16,12 +16,12 @@
   	</sql>
   	
   	<select id="getTotalCount" resultType="Long" parameterType="Pager">
-  		SELECT COUNT(BOARDNUM) FROM NOTICE
+  		SELECT COUNT(BOARDNUM) FROM QNA
   		<include refid="search"></include>
   	</select>
   	
-  	<select id="getList" parameterType="Pager" resultType="NoticeVO">
-  		SELECT * FROM NOTICE
+  	<select id="getList" parameterType="Pager" resultType="QnaVO">
+  		SELECT * FROM QNA
   		<include refid="search"></include>
   		ORDER BY BOARDNUM DESC
   		LIMIT #{startIndex}, #{perPage}
@@ -29,14 +29,14 @@
   	
   	<select id="getDetail" parameterType="BoardVO" resultMap="getDetailResult">
   		SELECT *
-  		FROM NOTICE N
+  		FROM QNA N
   			LEFT JOIN
-  			NOTICEFILES NF
+  			QNAFILES NF
   			USING (BOARDNUM)
 		WHERE BOARDNUM=#{boardNum}
   	</select>
   	
-  	<resultMap type="NoticeVO" id="getDetailResult">
+  	<resultMap type="QnaVO" id="getDetailResult">
   		<id column="BOARDNUM" property="boardNum"/>
   		<result column="BOARDHEAD" property="boardHead"/>
   		<result column="BOARDWRITER" property="boardWriter"/>
@@ -51,17 +51,13 @@
   	</resultMap>
   	
   	<insert id="add" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="boardNum">
-  		INSERT INTO NOTICE
+  		INSERT INTO QNA
   		(BOARDWRITER, BOARDHEAD, BOARDDATE, BOARDHIT, BOARDCONTENTS)
   		VALUES
   		(#{boardWriter}, #{boardHead}, now(), 0, #{boardContents})
   	</insert>
   	
   	<insert id="fileAdd" parameterType="FileVO">
-  		INSERT INTO NOTICEFILES VALUES(null, #{boardNum}, #{fileName}, #{oriName});
+  		INSERT INTO QNAFILES VALUES(null, #{boardNum}, #{fileName}, #{oriName});
   	</insert>
-  	
-  	<select id="getFileDetail" parameterType="FileVO" resultType="FileVO">
-  		SELECT * FROM NOTICEFILES WHERE FILENUM=#{fileNum}
-  	</select>
   </mapper>

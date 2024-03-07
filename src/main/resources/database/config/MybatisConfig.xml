@@ -6,6 +6,9 @@
   	<typeAliases>
   		<typeAlias type="com.gdj.boot.board.BoardVO" alias="BoardVO"/>
   		<typeAlias type="com.gdj.boot.board.notice.NoticeVO" alias="NoticeVO"/>
+  		<typeAlias type="com.gdj.boot.board.qna.QnaVO" alias="QnaVO"/>
+  		<typeAlias type="com.gdj.boot.board.FileVO" alias="FileVO"/>
   		<typeAlias type="com.gdj.boot.util.Pager" alias="Pager"/>
+  		
   	</typeAliases>
   </configuration>

@@ -1,6 +1,7 @@
 package com.gdj.boot.board;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,4 +23,5 @@ public class BoardVO {
 	private Long boardHit;
 	private String boardContents;
 	
+	private List<FileVO> fileVOs;
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>${board}List</title>
+<title></title>
 
 <c:import url="../temp/css.jsp"></c:import>
 
@@ -45,7 +45,7 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">${board}</h1>
+						<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
 						<a href="#"
 							class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
 							class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
@@ -53,34 +53,16 @@
 
 					<!-- Content Row -->
 					<div class="row">
-						<div class="col-6">
-							<form action="" method="post" enctype="multipart/form-data">
-								<div class="mb-3">
-									<label for="title" class="form-label">제목</label> <input
-										type="text" class="form-control" id="title" name="boardHead">
-								</div>
-								<div class="mb-3">
-									<label for="writer" class="form-label">작성자</label> <input
-										type="text" class="form-control" id="writer"
-										name="boardWriter">
-								</div>
-								<div class="mb-3">
-									<label for="contents" class="form-label">내용</label>
-									<textarea class="form-control" id="contents" name="boardContents" rows="3"></textarea>
-								</div>
-
-								<div class="mb-3">
-									<input type="file" name="attach">
-									<input type="file" name="attach">
-									<input type="file" name="attach">
-								</div>
-
-								<div class="mb-3">
-									<button class="btn btn-danger">작성</button>
-								</div>
-							</form>
+						<h3>${vo.boardHead}</h3>
+						<h3>${vo.boardContents}</h3>
+						<div>
+						<c:forEach items="${vo.fileVOs}" var="file">
+							<img src="/files/${board}/${file.fileName}">
+							<a href="/${board}/fileDown?fileNum=${file.fileNum}">${file.oriName}</a>
+						</c:forEach>
 						</div>
 					</div>
+
 				</div>
 				<!-- /.container-fluid -->
 
@@ -127,7 +109,7 @@
 
 	<!-- Script-->
 	<c:import url="../temp/script.jsp"></c:import>
-
+	
 
 </body>
 
