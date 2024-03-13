@@ -10,6 +10,7 @@
   		<typeAlias type="com.gdj.boot.board.FileVO" alias="FileVO"/>
   		<typeAlias type="com.gdj.boot.util.Pager" alias="Pager"/>
   		<typeAlias type="com.gdj.boot.member.MemberVO" alias="MemberVO"/>
+  		<typeAlias type="com.gdj.boot.member.RoleVO" alias="RoleVO"/>
   		
   	</typeAliases>
   </configuration>

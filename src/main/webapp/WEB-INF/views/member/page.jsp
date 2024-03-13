@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,14 +55,16 @@
 
 					<!-- Content Row -->
 					<div class="row">
-						<h3>${vo.boardHead}</h3>
-						<h3>${vo.boardContents}</h3>
-						<div>
-						<c:forEach items="${vo.fileVOs}" var="file">
-							<img src="/files/${board}/${file.fileName}">
-							<a href="/${board}/fileDown?fileNum=${file.fileNum}">${file.oriName}</a>
-						</c:forEach>
-						</div>
+						<sec:authentication property="principal" var="memberVO"/>
+						<h1>
+							${memberVO.username}, ${memberVO.email}
+						</h1>
+						<h2>
+							<sec:authentication property="principal.address"/>
+						</h2>
+						<h2>
+							<sec:authentication property="name"/>
+						</h2>
 					</div>
 
 				</div>
@@ -83,6 +87,8 @@
 	<a class="scroll-to-top rounded" href="#page-top"> <i
 		class="fas fa-angle-up"></i>
 	</a>
+
+	
 
 	<!-- Script-->
 	<c:import url="../temp/script.jsp"></c:import>

@@ -1,23 +1,48 @@
 package com.gdj.boot.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
-public class MemberService {
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
+public class MemberService implements UserDetailsService{
 	@Autowired
 	private MemberDAO memberDAO;
 	
-	//삭제할 메서드...
-	public MemberVO detail()throws Exception{
-		MemberVO memberVO = new MemberVO();
-		memberVO.setUsername("winter");
-		return memberDAO.getDetail(memberVO);
-	}
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(username);
+		
+		log.info("============로그인 진행============");
+		log.info("{}",username);
+		try {
+			memberVO = memberDAO.getDetail(memberVO);			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return memberVO;
+	}
+
 	public int add(MemberVO memberVO)throws Exception{
-		return memberDAO.add(memberVO);
+		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		int result = memberDAO.add(memberVO);
+		result = memberDAO.addMemberRole(memberVO);
+		return result;
 	}
 	
 	//add 검증 메서드

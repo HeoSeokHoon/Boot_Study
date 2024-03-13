@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +16,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>${board} List</title>
+<title>${board}List</title>
 
 <c:import url="../temp/css.jsp"></c:import>
 
@@ -79,24 +81,26 @@
 					<div class="row">
 						<nav aria-label="Page navigation example">
 							<ul class="pagination">
-								<li class="page-item">
-									<a class="page-link" href="./list?page=${pager.startNum-1}&kind=${kind}&search=${search}" aria-label="Previous">
-										<span aria-hidden="true">&laquo;</span>
-									</a>
-								</li>
-								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-									<li class="page-item"><a class="page-link" href="./list?page=${i}&kind=${kind}&search=${search}">${i}</a></li>
+								<li class="page-item"><a class="page-link"
+									href="./list?page=${pager.startNum-1}&kind=${kind}&search=${search}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
+									var="i">
+									<li class="page-item"><a class="page-link"
+										href="./list?page=${i}&kind=${kind}&search=${search}">${i}</a></li>
 								</c:forEach>
-								<li class="page-item">
-									<a class="page-link" href="./list?page=${pager.lastNum+1}&kind=${kind}&search=${search}" aria-label="Next">
-										<span aria-hidden="true">&raquo;</span>
-									</a>
-								</li>
+								<li class="page-item"><a class="page-link"
+									href="./list?page=${pager.lastNum+1}&kind=${kind}&search=${search}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a></li>
 							</ul>
 						</nav>
-						<div>
-							<a href="./add" class="btn btn-primary">글쓰기</a>
-						</div>
+						<sec:authorize access="hasRole('ADMIN')">
+							<div>
+								<a href="./add" class="btn btn-primary">글쓰기</a>
+							</div>
+						</sec:authorize>
 					</div>
 
 				</div>
@@ -120,32 +124,9 @@
 		class="fas fa-angle-up"></i>
 	</a>
 
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready
-					to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<!-- Script-->
 	<c:import url="../temp/script.jsp"></c:import>
-	
+
 
 </body>
 

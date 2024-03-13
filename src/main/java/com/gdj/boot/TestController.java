@@ -1,6 +1,7 @@
 package com.gdj.boot;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +20,15 @@ public class TestController {
 		log.debug("debug message");
 		log.trace("trace message");
 		return "index";
+	}
+	
+	@GetMapping("/expired")
+	public String expierd(Model model) {
+		
+		model.addAttribute("result","logout");
+		model.addAttribute("path","/member/login");
+		
+		
+		return "commons/result";
 	}
 }

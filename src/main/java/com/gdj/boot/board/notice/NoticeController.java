@@ -16,6 +16,7 @@ import com.gdj.boot.board.BoardVO;
 import com.gdj.boot.board.FileVO;
 import com.gdj.boot.util.Pager;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -48,8 +49,10 @@ public class NoticeController {
 	}
 	
 	@PostMapping("add")
-	public String add(NoticeVO noticeVO, MultipartFile [] attach)throws Exception{
-		noticeService.add(noticeVO, attach);
+	public String add(HttpSession session, NoticeVO noticeVO, MultipartFile [] attach)throws Exception{
+		if(session.getAttribute("member")!=null) {
+			noticeService.add(noticeVO, attach);			
+		}
 		return "redirect:./list";
 	}
 	

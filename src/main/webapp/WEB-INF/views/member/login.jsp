@@ -70,53 +70,39 @@
 												<div class="col-lg-6">
 													<div class="p-5">
 														<div class="text-center">
-															<h1 class="h4 text-gray-900 mb-4">Member Join!</h1>
+															<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+															<div>
+																<h3>${message}</h3>
+															</div>
 														</div>
+
+
 														<form:form cssClass="user" modelAttribute="memberVO">
 															<div class="form-group">
 																<form:input path="username"
-																	cssClass="form-control form-control-user" id="username" placeholder="ID"></form:input>
+																	cssClass="form-control form-control-user" id="username" value="${cookie.rememberID.value}"></form:input>
 																<form:errors path="username"></form:errors>
 															</div>
 															<div class="form-group">
 																<form:password path="password"
-																	cssClass="form-control form-control-user" id="password"  placeholder="Password"></form:password>
+																	cssClass="form-control form-control-user" id="password"></form:password>
 																<form:errors path="password"></form:errors>
-
 															</div>
-															<div class="form-group">
-																<form:password path="passwordCheck"
-																	cssClass="form-control form-control-user"
-																	id="passwordCheck" placeholder="PasswordCheck"></form:password>
-																<form:errors path="passwordCheck"></form:errors>
-
+															<div class="row">
+																<div class="form-check mb-3 col">
+																	<input class="form-check-input" type="checkbox"
+																		value="" id="remember-me" name="rememberMe"> <label
+																		class="form-check-label" for="remember-me">
+																		Remember Me</label>
+																</div>
+																<div class="form-check mb-3 col">
+																	<input class="form-check-input" type="checkbox"
+																		value="rememberId" id="rememberId" name="rememberId"> <label
+																		class="form-check-label" for="rememberId"> ID
+																		기억하기</label>
+																</div>
 															</div>
-
-															<div class="form-group">
-																<form:input path="phone"
-																	cssClass="form-control form-control-user" id="phone" placeholder="phone"></form:input>
-																<form:errors path="phone"></form:errors>
-
-															</div>
-															<div class="form-group">
-																<form:input path="email"
-																	cssClass="form-control form-control-user" id="email" placeholder="email"></form:input>
-																<form:errors path="email"></form:errors>
-															</div>
-															<div class="form-group">
-																<form:input path="address"
-																	cssClass="form-control form-control-user" id="address" placeholder="address"></form:input>
-																<form:errors path="address"></form:errors>
-
-															</div>
-															<div class="form-group">
-																<form:input path="name"
-																	cssClass="form-control form-control-user" id="name" placeholder="name"></form:input>
-																<form:errors path="name"></form:errors>
-
-															</div>
-
-															<button class="btn btn-primary btn-user btn-block">Join</button>
+															<button class="btn btn-primary btn-user btn-block">Login</button>
 
 
 															<hr>
@@ -129,37 +115,38 @@
 																class="fab fa-facebook-f fa-fw"></i> Login with Facebook
 															</a>
 														</form:form>
-
+														<hr>
+														<div class="text-center">
+															<a class="small" href="forgot-password.html">Forgot
+																Password?</a>
+														</div>
+														<div class="text-center">
+															<a class="small" href="register.html">Create an
+																Account!</a>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-
 								</div>
-
 							</div>
-
 						</div>
-
-
 					</div>
-
+					<!-- /.container-fluid -->
 				</div>
-				<!-- /.container-fluid -->
+				<!-- End of Main Content -->
+
+				<!-- Footer -->
+				<c:import url="../temp/footer.jsp"></c:import>
+				<!-- End of Footer -->
 
 			</div>
-			<!-- End of Main Content -->
-
-			<!-- Footer -->
-			<c:import url="../temp/footer.jsp"></c:import>
-			<!-- End of Footer -->
+			<!-- End of Content Wrapper -->
 
 		</div>
-		<!-- End of Content Wrapper -->
-
+		<!-- End of Page Wrapper -->
 	</div>
-	<!-- End of Page Wrapper -->
 
 
 	<a class="scroll-to-top rounded" href="#page-top"> <i
@@ -167,7 +154,6 @@
 	</a>
 
 	<c:import url="../temp/script.jsp"></c:import>
-
 </body>
 
 </html>
