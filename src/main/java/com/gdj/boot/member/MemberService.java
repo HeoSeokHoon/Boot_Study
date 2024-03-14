@@ -43,6 +43,7 @@ public class MemberService extends DefaultOAuth2UserService implements UserDetai
 		if(c.getClientName().equals("Kakao")) {
 			user = this.kakao(user);
 		}
+		((MemberVO)user).setSocial(c.getClientName());
 		return user;
 	}
 	
