@@ -80,7 +80,8 @@
 														<form:form cssClass="user" modelAttribute="memberVO">
 															<div class="form-group">
 																<form:input path="username"
-																	cssClass="form-control form-control-user" id="username" value="${cookie.rememberID.value}"></form:input>
+																	cssClass="form-control form-control-user" id="username"
+																	value="${cookie.rememberID.value}"></form:input>
 																<form:errors path="username"></form:errors>
 															</div>
 															<div class="form-group">
@@ -91,13 +92,13 @@
 															<div class="row">
 																<div class="form-check mb-3 col">
 																	<input class="form-check-input" type="checkbox"
-																		value="" id="remember-me" name="rememberMe"> <label
+																		id="remember-me" name="rememberMe"> <label
 																		class="form-check-label" for="remember-me">
 																		Remember Me</label>
 																</div>
 																<div class="form-check mb-3 col">
 																	<input class="form-check-input" type="checkbox"
-																		value="rememberId" id="rememberId" name="rememberId"> <label
+																		fid="rememberId" name="rememberId"> <label
 																		class="form-check-label" for="rememberId"> ID
 																		기억하기</label>
 																</div>

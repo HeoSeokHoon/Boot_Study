@@ -36,6 +36,9 @@
 			<li class="nav-item mx-1"><a class="nav-link"
 				href="/member/login"> <i class="fas fa-user"></i>&nbsp 로그인
 			</a></li>
+			<li class="nav-item mx-1"><a class="nav-link"
+				href="/oauth2/authorization/kakao"> <i class="fas fa-user"></i>&nbsp 카카오로그인
+			</a></li>
 			<li class="nav-item mx-1"><a class="nav-link" href="/member/add">
 					<i class="fas fa-sign-in-alt"></i>&nbsp 회원가입
 			</a></li>

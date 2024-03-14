@@ -2,6 +2,7 @@ package com.gdj.boot.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,7 @@ import com.gdj.boot.member.MemberService;
 
 
 @Configuration
+//@EnableWebSecurity(debug=true)
 @EnableWebSecurity
 public class SecurityConfig {
 	
@@ -28,9 +30,13 @@ public class SecurityConfig {
 	@Autowired
 	private MemberService memberService;
 	
+	@Value("${security.debugMode}")
+	private boolean debugMode;
+	
 	@Bean
 	WebSecurityCustomizer webSecurityCustomizer() {
 		return web -> web
+				.debug(debugMode)
 				.ignoring()
 				.requestMatchers("/css/**")
 				.requestMatchers("/js/**")
@@ -94,7 +100,14 @@ public class SecurityConfig {
 							.maximumSessions(1)
 							.maxSessionsPreventsLogin(false)
 							.expiredUrl("/expired")		
-				);
+				)
+				.oauth2Login(
+					(oauth2)->
+						oauth2.userInfoEndpoint(
+								(ue)->ue.userService(memberService)
+						)
+				)
+				;
 		
 		return security.build();
 	}

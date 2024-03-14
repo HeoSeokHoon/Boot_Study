@@ -3,10 +3,12 @@ package com.gdj.boot.member;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import com.gdj.boot.member.groups.MemberJoinGroup;
 import com.gdj.boot.member.groups.MemberUpdateGroup;
@@ -17,7 +19,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class MemberVO implements UserDetails{
+public class MemberVO implements UserDetails, OAuth2User{
 	@NotBlank(message = "꼭 입력", groups = {MemberJoinGroup.class, MemberUpdateGroup.class})
 	private String username;
 	
@@ -38,6 +40,11 @@ public class MemberVO implements UserDetails{
 	
 	private List<RoleVO> roleVOs;
 	
+	private String social;
+	private Map<String,Object> attributes;
+	
+	
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -48,5 +55,6 @@ public class MemberVO implements UserDetails{
 		}
 		return authorities;
 	}
+
 		
 }
